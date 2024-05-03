@@ -27,7 +27,7 @@ document.getElementById('dropdown-filter').addEventListener('change', handleDrop
 // 이벤트 핸들러들
 function handleSearchInput(event) {
     const query = event.target.value.toLowerCase();
-    const filteredData = values.filter(row => row[1] && row[1].toLowerCase().includes(query));  // 차량운전자 기준으로 필터
+    const filteredData = values.filter(row => row[2] && row[2].toLowerCase().includes(query));  // 차량번호 기준으로 필터
     displayData(filteredData);
 }
 
@@ -103,7 +103,7 @@ function displayData(data) {
 
             const detailTd = document.createElement('td');
             detailTd.setAttribute('colspan', 3);
-            detailTd.textContent = row[4];  // 자재 내용 표시
+            detailTd.textContent = row[3];  // 자재 내용 표시
 
             detailTr.appendChild(detailTd);
             tr.parentNode.insertBefore(detailTr, tr.nextSibling);
