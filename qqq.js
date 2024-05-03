@@ -72,5 +72,5 @@ document.getElementById('search-input').addEventListener('input', (event) => {
 // 초기 데이터 로드 및 주기적 업데이트 설정
 document.addEventListener('DOMContentLoaded', () => {
     loadData();
-    setInterval(loadData, 60000); // 60초 간격으로 데이터 새로 고침
+    setInterval(loadData, 10000); // 60초 간격으로 데이터 새로 고침
 });
