@@ -6,15 +6,26 @@ let values = [];
 
 // 데이터 로드 및 초기화
 async function loadData() {
+    console.log("Attempting to load data..."); // 로그 추가
     try {
         const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`);
         const data = await response.json();
         values = data.values || [];
         displayData(values);
+        console.log("Data loaded successfully"); // 성공 로그
     } catch (error) {
         console.error("Error fetching data:", error);
     }
 }
+
+// 페이지 로드 시 데이터 로드 및 주기적 업데이트 설정
+document.addEventListener('DOMContentLoaded', () => {
+    loadData();
+    setInterval(loadData, 60000); // 1분 간격으로 데이터 새로고침
+});
+
+// 나머지 코드는 변경 없음...
+
 
 // 데이터 표시
 function displayData(data) {
@@ -76,9 +87,4 @@ document.getElementById('search-input').addEventListener('input', (event) => {
     const query = event.target.value.toLowerCase();
     const filteredData = values.filter(row => row[3].toLowerCase().includes(query));
     displayData(filteredData);
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    loadData();
-    setInterval(loadData, 60000); // 데이터를 1분 간격으로 새로 고침
 });
