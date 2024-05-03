@@ -4,7 +4,6 @@ const RANGE = '시트1!A2:H500';
 
 let values = [];
 
-// 데이터 로드 및 초기화
 async function loadData() {
     console.log("Attempting to load data..."); // 로그 추가
     try {
@@ -35,7 +34,7 @@ function displayData(data) {
         });
 
         const detailTd = document.createElement('td');
-        detailTd.textContent = row[2];
+        detailTd.textContent = "자재: " + row[2]; // 자재 정보 앞에 "자재:" 추가
         detailTd.setAttribute('colspan', 3);
         detailRow.appendChild(detailTd);
 
@@ -81,10 +80,7 @@ document.getElementById('search-input').addEventListener('input', (event) => {
     displayData(filteredData);
 });
 
-// 페이지 로드 시 데이터 로드 및 주기적 업데이트 설정
 document.addEventListener('DOMContentLoaded', () => {
     loadData();
-    setInterval(loadData, 60000); // 1분 간격으로 데이터 새로고침
+    setInterval(loadData, 60000); // 데이터를 1분 간격으로 새로 고침
 });
-
-// 나머지 코드는 변경 없음...
