@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #000;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색</title>
+    <link rel="stylesheet" href="styles2.css?09">
+    <style>
+        /* 현장명이 "H-Center"인 경우에 붉은색 강조 표시 */
+        .highlight {
+            background-color: #cd3232 !important;
+			}
+
+/* 페이지 네비게이션 메뉴 스타일 */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            background-color: #333;
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+        }
+
+        nav a:hover {
+            color: #cd3232;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">건설차량</a></li>
+            <li><a href="qqq.html">CR통제</a></li>
+            <li><a href="sss.html">주차</a></li>
+        </ul>
+    </nav>
+    <div class="search-container">
+        <input type="tel" id="search-input" placeholder="검색..">
+        <select id="dropdown-filter"></select>
+    </div>
+
+    <table id="data-table">
+        <!-- Data will be populated here via JavaScript -->
+    </table>
+
+    <script src="sss.js?102141"></script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #000;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색</title>
+    <link rel="stylesheet" href="tt.css?2">
+</head>
+<body>
+    <div id="search-area" class="search-container">
+        <input type="text" id="search-input" placeholder="검색..">
+        <div id="search-results"></div>
+    </div>
+
+    <!-- 숫자 키패드 추가 -->
+    <div id="num-pad" class="num-pad">
+        <div class="row">
+            <button class="num-key">1</button>
+            <button class="num-key">2</button>
+            <button class="num-key">3</button>
+        </div>
+        <div class="row">
+            <button class="num-key">4</button>
+            <button class="num-key">5</button>
+            <button class="num-key">6</button>
+        </div>
+        <div class="row">
+            <button class="num-key">7</button>
+            <button class="num-key">8</button>
+            <button class="num-key">9</button>
+        </div>
+        <div class="row">
+            <button class="num-key">0</button>
+            <button class="num-key clear">지우기</button>
+        </div>
+    </div>
+
+    <table id="data-table">
+        <!-- Data will be populated here via JavaScript -->
+    </table>
+
+    <script src="tt.js?2"></script>
+</body>
+</html>

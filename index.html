@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #000;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색</title>
+    <link rel="stylesheet" href="styles2.css?10">
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: visible; /* overflow 속성을 visible로 변경 */
+        }
+
+        input[type="search"], select {
+            font-size: 16px;
+            width: auto; /* 최대 너비 제한을 제거하고 자동으로 조정 */
+            margin: 0; /* 필요에 따라 마진 조정 */
+            padding: 8px; /* 적당한 패딩 제공 */
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #333;
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+        }
+
+        nav a:hover {
+            color: #cd3232;
+        }
+
+        /* 스타일 조정 */
+        .search-container {
+            padding: 10px;
+            background-color: #f2f2f2; /* 배경색 변경 */
+            display: flex;
+            justify-content: space-between; /* 검색 필드와 드롭다운을 양쪽 끝으로 배치 */
+        }
+
+        #data-table {
+            width: 100%;
+            background-color: #fff; /* 결과 테이블의 배경색 */
+            color: #000; /* 글자 색상 */
+            overflow: auto; /* 필요한 경우 스크롤바 표시 */
+        }
+.search-container {
+    position: fixed; /* 상단에 고정 */
+    top: 20; /* 화면의 상단에 고정 */
+    left: 0;
+    width: 96%; /* 화면 전체 너비로 설정 */
+    background-color: #333; /* 배경색 변경 */
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10; /* 다른 요소 위에 위치 */
+    display: flex;
+    justify-content: space-between;
+}
+
+    </style>
+</head>
+
+<body>
+<!--    <nav>
+        <ul>
+            <li><a href="index.html">건설차량</a></li>
+            <li><a href="qqq.html">CR통제</a></li>
+            <li><a href="sss.html">주차</a></li>
+        </ul>
+    </nav>-->
+    <!-- 메뉴 바 바로 아래에 검색 컨테이너 배치 -->
+    <div class="search-container">
+        <input type="search" id="search-input" placeholder="이름검색">
+        <select id="dropdown-filter"></select>
+    </div>
+    <!-- 검색 결과를 검색 컨테이너 바로 아래에 위치 -->
+    <table id="data-table">
+        <!-- Data will be populated here via JavaScript -->
+    </table>
+
+    <script src="qqq.js?090712"></script>
+</body>
+
+</html>

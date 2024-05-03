@@ -1,0 +1,122 @@
+#data-table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed; 
+    transition: background-color 0.5s ease;
+}
+
+#data-table th, #data-table td {
+    border: 1px solid #ddd;
+    padding: 20px 15px; 
+}
+
+#data-table tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.selected-row {
+    background-color: #ffdb58 !important;
+    font-weight: bold;
+}
+
+.unapproved {
+    background-color: #ef282887 !important;
+}
+
+input, select {
+    margin: 5px 0;
+    padding: 15px;
+}
+
+/* 애니메이션을 위한 스타일 */
+@keyframes slideDown {
+  from { max-height: 0; opacity: 0; }
+  to   { max-height: 50px; opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { max-height: 50px; opacity: 1; }
+  to   { max-height: 0; opacity: 0; }
+}
+
+.detail-cell {
+    white-space: pre-line;
+    background-color: #f5f5f5;
+    padding: 8px 16px;
+    font-size: 1em;
+    max-height: 50px;
+    overflow: hidden;
+    opacity: 1;
+    font-weight: bold;
+}
+
+.slide-down {
+    animation: slideDown 0.3s ease-out forwards;
+}
+
+.slide-up {
+    animation: slideUp 0.3s ease-in forwards;
+}
+
+.detail-row {
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, opacity 0.4s ease-in-out;
+    max-height: 0;
+    opacity: 0;
+    font-weight: bold;
+}
+
+.expanded {
+    max-height: 100px; 
+    opacity: 1;
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 95%;
+    background-color: white;
+    z-index: 10;
+    padding: 10px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-container {
+    position: fixed;      /* 고정 위치 설정 */
+    bottom: 0;            /* 화면 하단에 위치 */
+    left: 0;              /* 화면 왼쪽 경계에 붙이기 */
+    width: 95%;          /* 전체 너비 사용 */
+    background-color: white; /* 배경색 지정, 필요에 따라 변경 가능 */
+    padding: 10px; 
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* 상단 그림자 추가 */
+    z-index: 10;          /* 다른 요소 위에 위치시키기 위해 z-index 추가 */
+    display: flex;        /* 이미 있던 스타일을 유지 */
+    justify-content: space-between; /* 이미 있던 스타일을 유지 */
+}
+
+
+#search-input {
+    width: calc(49% - 5px);
+    margin-right: 2%;
+}
+
+#dropdown-filter {
+    width: 49%; 
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+@media (max-width: 600px) {
+    #search-input, #dropdown-filter {
+        width: calc(49% - 5px);
+    }
+    #search-input {
+        margin-right: 2%;
+    }
+}
