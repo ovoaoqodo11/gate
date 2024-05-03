@@ -64,5 +64,5 @@ document.getElementById('search-input').addEventListener('input', (event) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     loadData();
-    setInterval(loadData, 60000); // 데이터를 1분 간격으로 새로 고침
+    setInterval(loadData, 10000); // 데이터를 10초 간격으로 새로 고침
 });
