@@ -15,18 +15,16 @@
 /* 첫 번째 열의 폰트 색상 변경 */
 #data-table td:first-child {
     color: #dd5;
-	font-weight: bold;
+    font-weight: bold;
 }
 
-/* 1,2행과 3,4행 색상 변경 */
-/* 1, 2행 배경색 */
-#data-table tr:nth-child(4n+1), #data-table tr:nth-child(4n+2) {
-    background-color: #34495E; /* 배경색 변경 */
+/* 2행씩 색상 변경 - 헤더 행 제외 */
+#data-table tr:nth-child(4n+2), #data-table tr:nth-child(4n+3) {
+    background-color: #34495E; /* 2행씩 첫 번째 그룹의 배경색 */
 }
 
-/* 3, 4행 배경색 */
-#data-table tr:nth-child(4n+3), #data-table tr:nth-child(4n+4) {
-    background-color: #333; /* 배경색 변경 */
+#data-table tr:nth-child(4n+4), #data-table tr:nth-child(4n+5) {
+    background-color: #333; /* 2행씩 두 번째 그룹의 배경색 */
 }
 
 .selected-row {
@@ -44,6 +42,7 @@ input, select {
     background-color: #555; /* 입력 요소 배경색 변경 */
     color: #fff; /* 입력 요소 텍스트 색상 변경 */
 }
+
 
 /* 애니메이션을 위한 스타일 */
 @keyframes slideDown {

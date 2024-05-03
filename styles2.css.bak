@@ -15,19 +15,17 @@
 /* 첫 번째 열의 폰트 색상 변경 */
 #data-table td:first-child {
     color: #dd5;
-	font-weight: bold;
+    font-weight: bold;
 }
 
-#data-table tr:nth-child(odd) {
-    background-color: #34495E; /* 홀수 행 배경색 변경 */
+/* 2행씩 색상 변경 - 헤더 행 제외 */
+#data-table tr:nth-child(4n+2), #data-table tr:nth-child(4n+3) {
+    background-color: #34495E; /* 2행씩 첫 번째 그룹의 배경색 */
 }
 
-/* 짝수 행 스타일 */
-#data-table tr:nth-child(even) {
-    background-color: #333; /* 짝수 행 배경색 변경 */
-    color: #fff; /* 폰트 색상 변경 */
+#data-table tr:nth-child(4n+4), #data-table tr:nth-child(4n+5) {
+    background-color: #333; /* 2행씩 두 번째 그룹의 배경색 */
 }
-
 
 .selected-row {
     background-color: #07599f !important;
@@ -44,6 +42,9 @@ input, select {
     background-color: #555; /* 입력 요소 배경색 변경 */
     color: #fff; /* 입력 요소 텍스트 색상 변경 */
 }
+
+/* 애니메이션 및 기타 스타일은 이전과 동일하게 유지 */
+
 
 /* 애니메이션을 위한 스타일 */
 @keyframes slideDown {
@@ -103,8 +104,6 @@ input, select {
     color: #fff; /* 텍스트 색상 변경 */
 }
 
-
-
 #search-input {
     width: calc(49% - 5px);
     margin-right: 2%;
@@ -124,15 +123,4 @@ input, select {
 
 @media (max-width: 600px) {
     #search-input, #dropdown-filter {
-        width: calc(49% - 5px);
-    }
-    #search-input {
-        margin-right: 2%;
-    }
-}
-
-#search-input::placeholder {
-    font-weight: bold; /* 굵게 설정 */
-    color: #dd5; /* 폰트 색상 설정 */
-	font-size: large;
-}
+        width: calc(49% -
