@@ -32,11 +32,16 @@ function displayData(data) {
             mainRow.appendChild(td);
         });
 
-        // 자재 정보 추가 (C열)
+        // 자재 정보 추가 (C열), 자재가 공백인 경우 높이 조정
         const detailTd = document.createElement('td');
         detailTd.textContent = row[2];
         detailTd.setAttribute('colspan', 3);
         detailRow.appendChild(detailTd);
+
+        if (!row[2].trim()) {
+            detailRow.style.height = '1px'; // 자재 정보가 없을 경우 행 높이를 1px로 설정
+            detailTd.style.border = 'none'; // 테두리 제거
+        }
 
         // 행 클릭 이벤트 핸들러 추가
         mainRow.addEventListener('click', () => {
@@ -70,7 +75,7 @@ function toggleDetails(mainRow, row) {
         // E열, F열 정보를 상세 행에 추가
         const detailTd = document.createElement('td');
         detailTd.setAttribute('colspan', 3);
-        detailTd.textContent = `담당:${row[4]} 만료일:${row[5]}`;
+        detailTd.textContent = `추가 정보: ${row[4]} / ${row[5]}`;
         detailTr.appendChild(detailTd);
         mainRow.parentNode.insertBefore(detailTr, mainRow.nextSibling);
     }

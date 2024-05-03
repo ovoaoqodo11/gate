@@ -32,15 +32,15 @@ function displayData(data) {
             mainRow.appendChild(td);
         });
 
-        // 자재 정보 추가 (C열), 자재가 공백인 경우 높이 조정
+        // 자재 정보 추가 (C열)
         const detailTd = document.createElement('td');
         detailTd.textContent = row[2];
         detailTd.setAttribute('colspan', 3);
         detailRow.appendChild(detailTd);
 
+        // 자재 정보가 공백인 경우 행을 숨김
         if (!row[2].trim()) {
-            detailRow.style.height = '1px'; // 자재 정보가 없을 경우 행 높이를 1px로 설정
-            detailTd.style.border = 'none'; // 테두리 제거
+            detailRow.style.display = 'none'; // 자재 행 숨기기
         }
 
         // 행 클릭 이벤트 핸들러 추가
