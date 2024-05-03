@@ -2,9 +2,14 @@ const API_KEY = 'AIzaSyDr7DBTHQ7yMdjzTHMhEHedf32F-MNI3DI';
 const SHEET_ID = '1WKBpAjV5GPcGjWIMZ3WacI6lboz3IIDpSVg5b4H0AaY';
 let RANGE;
 
-RANGE = '시트2!A2:G2000';
+const currentPage = window.location.pathname;
 
+RANGE = '시트1!A2:H500';
+
+// 활용할 값 초기화
 let values = [];
+const today = new Date();
+const formattedToday = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
 fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`)
     .then(response => response.json())
@@ -19,62 +24,22 @@ fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}
     });
 
 
-// 초성 추출 함수
-function getInitials(char) {
-    const INITIAL_CODE = 44032; // 한글 유니코드 시작 코드
-    const INITIAL_CONSONANTS = [
-        'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
-    ];
-    const INITIAL_OFFSET = 588; // 초성 인덱스 변환을 위한 오프셋
+// 이벤트 리스너들
+document.getElementById('search-input').addEventListener('input', handleSearchInput);
+document.getElementById('dropdown-filter').addEventListener('change', handleDropdownChange);
 
-    const charCode = char.charCodeAt(0);
-    if (charCode >= 44032 && charCode <= 55203) {
-        const initialIndex = Math.floor((charCode - INITIAL_CODE) / INITIAL_OFFSET);
-        return INITIAL_CONSONANTS[initialIndex];
-    }
-    return char; // 한글이 아닌 경우 그대로 반환
-}
-
-// 입력된 쿼리의 초성을 추출하는 함수
-function getQueryInitials(query) {
-    return [...query].map(char => getInitials(char)).join('');
-}
-
-// 전체 이름 검색을 수행하는 함수
-function searchByName(query, rowData) {
-    return rowData.includes(query);
-}
-
-// 초성 검색을 수행하는 함수
-function searchByInitials(query, rowData) {
-    const convertedQuery = getQueryInitials(query);
-    const convertedData = getQueryInitials(rowData);
-    return convertedData.includes(convertedQuery);
-}
-
-// 검색 이벤트 리스너에서 사용할 함수
-document.getElementById('search-input').addEventListener('input', function(event) {
-    const query = event.target.value.trim().toLowerCase();
-    let filteredData = values.filter(row => searchByName(query, row[1].toLowerCase()));
-
-    // 전체 이름으로 검색된 결과가 없는 경우에만 초성 검색 수행
-    if (filteredData.length === 0) {
-        filteredData = values.filter(row => searchByInitials(query, row[1].toLowerCase()));
-    }
-
+// 이벤트 핸들러들
+function handleSearchInput(event) {
+    const query = event.target.value.toLowerCase();
+    const filteredData = values.filter(row => row[6] && row[6].toLowerCase().includes(query));
     displayData(filteredData);
-});
+}
 
-
-
-
-
-//업체명리스트
-document.getElementById('dropdown-filter').addEventListener('change', function(event) {
+function handleDropdownChange(event) {
     const filterValue = event.target.value;
     const filteredData = filterValue ? values.filter(row => row[0] === filterValue) : values;
     displayData(filteredData);
-});
+}
 
 
 //업체검색
@@ -103,7 +68,7 @@ function displayData(data) {
 
     // 헤더 생성
     const thead = document.createElement('thead');
-    const headerRow = ["이름", "부서", "출입구역"];
+    const headerRow = ["날짜", "업체명", "차량번호"];
     const tr = document.createElement('tr');
     headerRow.forEach(header => {
         const th = document.createElement('th');
@@ -116,59 +81,79 @@ function displayData(data) {
     // 본문 생성
     const tbody = document.createElement('tbody');
     data.forEach(row => {
+
+        // A열 값을 조작하여 (주)와 ㈜ 문자열 제거
+        row[0] = row[0].replace(/\(주\)/g, '').replace(/㈜/g, '').trim();
+
+
         const tr = document.createElement('tr');
 
-        // 이름, 부서, 출입구역의 순서로 데이터 추가
-        const displayOrder = [1, 0, 4];
+        // H열이 "승인"이 아닐 때 해당 행의 폰트 색상만 빨간색으로 변경
+        if (row[7] !== '승인됨') {
+            tr.classList.add('unapproved'); // "승인"되지 않은 항목의 클래스
+        }
+        
+tr.addEventListener('click', function() {
+    const expandedRow = document.querySelector('.expanded');
+    const previouslySelected = document.querySelector('.selected-row');
+
+    if (previouslySelected) {
+        previouslySelected.classList.remove('selected-row');
+    }
+
+    if (expandedRow) {
+        expandedRow.classList.remove('expanded');
+        setTimeout(() => expandedRow.remove(), 100);
+    }
+
+    if (tr === expandedRow?.previousElementSibling) {
+        return;
+    }
+
+    tr.classList.add('selected-row');
+
+    const detailTr = document.createElement('tr');
+    detailTr.classList.add('detail-row', 'slide-down');
+    
+    const detailTd = document.createElement('td');
+    detailTd.setAttribute('colspan', 3);
+    
+    let displayString;
+    if (!row[3] || row[3].trim() === "") {
+        displayString = "자재없음";
+    } else {
+        if (row[5] && row[5] !== '0') {
+            displayString = `${row[3]} : ${row[5]}${row[4]} (${row[1]})`;
+        } else {
+            displayString = `${row[3]} (${row[1]})`;
+        }
+    }
+
+    detailTd.textContent = displayString;
+
+    detailTr.appendChild(detailTd);
+    tr.parentNode.insertBefore(detailTr, tr.nextSibling);
+
+    setTimeout(() => detailTr.classList.add('expanded'), 10);
+});
+        // 날짜, 업체명, 차량번호의 순서로 데이터 추가
+        const displayOrder = [2, 0, 6];
         displayOrder.forEach(idx => {
             const td = document.createElement('td');
-            td.textContent = row[idx] || ''; // B, A, E열
+            if (idx === 2) {
+                td.textContent = formatDate(row[2]) || '';  // C열
+            } else {
+                td.textContent = row[idx] || '';  // A, G열
+            }
+		
+
             tr.appendChild(td);
         });
-
-        tr.addEventListener('click', function() {
-            const expandedRow = document.querySelector('.expanded');
-            const previouslySelected = document.querySelector('.selected-row');
-
-            if (previouslySelected) {
-                previouslySelected.classList.remove('selected-row');
-            }
-
-            if (expandedRow) {
-                expandedRow.classList.remove('expanded');
-                setTimeout(() => expandedRow.remove(), 100);
-            }
-
-            if (tr === expandedRow?.previousElementSibling) {
-                return;
-            }
-
-            tr.classList.add('selected-row');
-
-            const detailTr = document.createElement('tr');
-            detailTr.classList.add('detail-row', 'slide-down');
-            
-            const detailTd = document.createElement('td');
-            detailTd.setAttribute('colspan', 3);
-
-            // 표시할 추가 정보
-            const additionalInfo = `출입사유: ${row[3] || '없음'}<br>
-                                    출입시간: ${row[6] || '없음'}<br>
-                                    연락처: ${row[2] || '없음'}<br>
-                                    출입만료: ${row[5] || '없음'}`;
-
-            detailTd.innerHTML = additionalInfo;
-
-            detailTr.appendChild(detailTd);
-            tr.parentNode.insertBefore(detailTr, tr.nextSibling);
-
-            setTimeout(() => detailTr.classList.add('expanded'), 10);
-        });
-
+        
         tbody.appendChild(tr);
     });
 
     table.appendChild(tbody);
 }
 
-
+fetchData();
