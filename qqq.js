@@ -4,19 +4,17 @@ const RANGE = '시트1!A2:H500';
 
 let values = [];
 
+// 데이터 로드 및 초기화
 async function loadData() {
-    console.log("Attempting to load data..."); // 로그 추가
     try {
         const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`);
         const data = await response.json();
         values = data.values || [];
         displayData(values);
-        console.log("Data loaded successfully"); // 성공 로그
     } catch (error) {
         console.error("Error fetching data:", error);
     }
 }
-
 
 // 데이터 표시
 function displayData(data) {
@@ -82,5 +80,5 @@ document.getElementById('search-input').addEventListener('input', (event) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     loadData();
-    setInterval(loadData, 60000); // 데이터를 1분 간격으로 새로 고침
+    setInterval(loadData, 10000); // 데이터를 1분 간격으로 새로 고침
 });
