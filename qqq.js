@@ -15,7 +15,7 @@ fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}
     .then(response => response.json())
     .then(data => {
         values = data.values;
-        values.sort((a, b) => a[0].localeCompare(b[0]) || a[6].localeCompare(b[6]));
+        values.sort((a, b) => a[0].localeCompare(b[0]) || a[5].localeCompare(b[5]));
         populateDropdown(values);
         displayData(values);
     })
@@ -31,7 +31,7 @@ document.getElementById('dropdown-filter').addEventListener('change', handleDrop
 // 이벤트 핸들러들
 function handleSearchInput(event) {
     const query = event.target.value.toLowerCase();
-    const filteredData = values.filter(row => row[6] && row[6].toLowerCase().includes(query));
+    const filteredData = values.filter(row => row[5] && row[5].toLowerCase().includes(query));
     displayData(filteredData);
 }
 
@@ -89,9 +89,9 @@ function displayData(data) {
         const tr = document.createElement('tr');
 
         // H열이 "승인"이 아닐 때 해당 행의 폰트 색상만 빨간색으로 변경
-        if (row[7] !== '승인됨') {
-            tr.classList.add('unapproved'); // "승인"되지 않은 항목의 클래스
-        }
+//        if (row[7] !== '승인됨') {
+//            tr.classList.add('unapproved'); // "승인"되지 않은 항목의 클래스
+//        }
         
 tr.addEventListener('click', function() {
     const expandedRow = document.querySelector('.expanded');
@@ -137,7 +137,7 @@ tr.addEventListener('click', function() {
     setTimeout(() => detailTr.classList.add('expanded'), 10);
 });
         // 날짜, 업체명, 차량번호의 순서로 데이터 추가
-        const displayOrder = [2, 0, 6];
+        const displayOrder = [0, 1, 5];
         displayOrder.forEach(idx => {
             const td = document.createElement('td');
             if (idx === 2) {
