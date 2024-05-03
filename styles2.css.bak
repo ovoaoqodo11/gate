@@ -18,16 +18,16 @@
 	font-weight: bold;
 }
 
-/* 1,2행과 3,4행 색상 변경 */
-/* 1, 2행 배경색 */
-#data-table tr:nth-child(4n+1), #data-table tr:nth-child(4n+2) {
-    background-color: #34495E; /* 배경색 변경 */
+#data-table tr:nth-child(odd) {
+    background-color: #34495E; /* 홀수 행 배경색 변경 */
 }
 
-/* 3, 4행 배경색 */
-#data-table tr:nth-child(4n+3), #data-table tr:nth-child(4n+4) {
-    background-color: #333; /* 배경색 변경 */
+/* 짝수 행 스타일 */
+#data-table tr:nth-child(even) {
+    background-color: #333; /* 짝수 행 배경색 변경 */
+    color: #fff; /* 폰트 색상 변경 */
 }
+
 
 .selected-row {
     background-color: #07599f !important;
@@ -103,6 +103,8 @@ input, select {
     color: #fff; /* 텍스트 색상 변경 */
 }
 
+
+
 #search-input {
     width: calc(49% - 5px);
     margin-right: 2%;
@@ -122,4 +124,15 @@ input, select {
 
 @media (max-width: 600px) {
     #search-input, #dropdown-filter {
-        width: calc(49% -
+        width: calc(49% - 5px);
+    }
+    #search-input {
+        margin-right: 2%;
+    }
+}
+
+#search-input::placeholder {
+    font-weight: bold; /* 굵게 설정 */
+    color: #dd5; /* 폰트 색상 설정 */
+	font-size: large;
+}

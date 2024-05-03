@@ -70,7 +70,7 @@ function toggleDetails(mainRow, row) {
         // E열, F열 정보를 상세 행에 추가
         const detailTd = document.createElement('td');
         detailTd.setAttribute('colspan', 3);
-        detailTd.textContent = `담당: ${row[4]} 만료일:${row[5]}`;
+        detailTd.textContent = `담당:${row[4]} 만료일:${row[5]}`;
         detailTr.appendChild(detailTd);
         mainRow.parentNode.insertBefore(detailTr, mainRow.nextSibling);
     }
