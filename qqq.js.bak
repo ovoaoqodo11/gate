@@ -3,6 +3,7 @@ const SHEET_ID = '1WKBpAjV5GPcGjWIMZ3WacI6lboz3IIDpSVg5b4H0AaY';
 const RANGE = '시트1!A2:H500';
 
 let values = [];
+let currentQuery = ''; // 검색 쿼리를 저장할 전역 변수
 
 // 데이터 로드 및 초기화
 async function loadData() {
@@ -10,11 +11,19 @@ async function loadData() {
         const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`);
         const data = await response.json();
         values = data.values || [];
-        console.log("Loaded data:", values);  // 데이터 로드 로그 확인
-        displayData(values);
+        filterAndDisplayData(); // 데이터를 로드하고 현재 검색 쿼리에 맞춰 필터링 후 표시
     } catch (error) {
         console.error("Error fetching data:", error);
     }
+}
+
+// 데이터 표시 및 필터링
+function filterAndDisplayData() {
+    let filteredData = values;
+    if (currentQuery) {
+        filteredData = values.filter(row => row[3] && row[3].toLowerCase().includes(currentQuery));
+    }
+    displayData(filteredData);
 }
 
 // 데이터 표시
@@ -55,14 +64,11 @@ function displayData(data) {
 }
 
 document.getElementById('search-input').addEventListener('input', (event) => {
-    const query = event.target.value.toLowerCase();
-    console.log("Search query:", query);  // 검색 쿼리 로그 확인
-    const filteredData = values.filter(row => row[3] && row[3].toLowerCase().includes(query));
-    console.log("Filtered data:", filteredData);  // 필터링 결과 로그 확인
-    displayData(filteredData);
+    currentQuery = event.target.value.toLowerCase();
+    filterAndDisplayData(); // 사용자가 입력할 때마다 쿼리 저장 및 데이터 필터링
 });
 
 document.addEventListener('DOMContentLoaded', () => {
     loadData();
-    setInterval(loadData, 60000); // 데이터를 60초 간격으로 새로 고침
+    setInterval(loadData, 10000); // 데이터를 60초 간격으로 새로 고침
 });
