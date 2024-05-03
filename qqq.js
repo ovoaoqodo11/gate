@@ -9,21 +9,9 @@ let lastModified = ''; // 마지막 데이터 로드 시간을 저장하는 변�
 // 데이터 로드 및 검색 쿼리에 따라 필터링하여 표시
 async function loadData() {
     try {
-        const headers = new Headers();
-        if (lastModified) {
-            headers.append('If-Modified-Since', lastModified);
-        }
-        const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`, {
-            method: 'GET',
-            headers: headers
-        });
-        if (response.status === 304) {
-            console.log('No changes to the data since last fetch.');
-            return; // No new data, skip updating.
-        }
+        const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`);
         const data = await response.json();
         values = data.values || [];
-        lastModified = response.headers.get('last-modified'); // Update the last modified time
         filterAndDisplayData(); // 데이터 로드 후 현재 검색 쿼리에 따라 데이터 필터링 및 표시
     } catch (error) {
         console.error("Error fetching data:", error);
@@ -76,26 +64,6 @@ function displayData(data) {
     }
 }
 
-// 상세 정보 토글
-function toggleDetails(mainRow, row) {
-    const previouslyExpanded = document.querySelector('.expanded');
-    if (previouslyExpanded) {
-        previouslyExpanded.previousElementSibling.classList.remove('selected-row');
-        previouslyExpanded.remove();
-    }
-
-    if (!mainRow.classList.contains('selected-row')) {
-        mainRow.classList.add('selected-row');
-        const detailTr = document.createElement('tr');
-        detailTr.classList.add('expanded');
-        const detailTd = document.createElement('td');
-        detailTd.setAttribute('colspan', 3);
-        detailTd.textContent = `추가 정보: ${row[4]} / ${row[5]}`;
-        detailTr.appendChild(detailTd);
-        mainRow.parentNode.insertBefore(detailTr, mainRow.nextSibling);
-    }
-}
-
 // 검색 입력 처리
 document.getElementById('search-input').addEventListener('input', (event) => {
     currentQuery = event.target.value.toLowerCase();
@@ -105,5 +73,5 @@ document.getElementById('search-input').addEventListener('input', (event) => {
 // 초기 데이터 로드 및 주기적 업데이트 설정
 document.addEventListener('DOMContentLoaded', () => {
     loadData();
-    setInterval(loadData, 10000); // 데이터를 60초 간격으로 새로 고침
+    setInterval(loadData, 20000); // 60초 간격으로 데이터 새로 고침
 });
