@@ -9,47 +9,7 @@
   <title>Document</title>
  </head>
  <body>
-  <form id="dataForm">
-    <input type="text" id="company" placeholder="업체명" required>
-    <input type="text" id="driver" placeholder="운전자" required>
-    <input type="text" id="material" placeholder="자재" required>
-    <input type="text" id="carNumber" placeholder="차량번호" required>
-    <input type="text" id="manager" placeholder="담당자" required>
-    <button type="submit">전송</button>
-</form>
-
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSewLgV59xOzanB2rEQ7hNhN0yujpkreKfpw2gxUq1Inkr9PXg/viewform?embedded=true" width="640" height="961" frameborder="0" marginheight="0" marginwidth="0">로드 중…</iframe>
  </body>
- <script>
- document.getElementById('dataForm').addEventListener('submit', function(e) {
-    e.preventDefault();
 
-    const formData = {
-        company: document.getElementById('company').value,
-        driver: document.getElementById('driver').value,
-        material: document.getElementById('material').value,
-        carNumber: document.getElementById('carNumber').value,
-        manager: document.getElementById('manager').value,
-        expireDate: new Date().toISOString().split('T')[0]  // 현재 날짜를 YYYY-MM-DD 형식으로 설정
-    };
-
-    appendDataToSheet(formData);
-});
-
-async function appendDataToSheet(data) {
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbyAT3Af2Doew7cSnlm2qLUnpTzVkO7SUMnoMNK4jB-1jnZObpm2cMgRQ3faqdRLouDL/exec';  // Google Apps Script 웹앱 URL
-    try {
-        const response = await fetch(scriptUrl, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        const result = await response.json();
-        console.log(result);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-</script>
 </html>
