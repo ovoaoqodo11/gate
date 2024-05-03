@@ -18,14 +18,6 @@ async function loadData() {
     }
 }
 
-// 페이지 로드 시 데이터 로드 및 주기적 업데이트 설정
-document.addEventListener('DOMContentLoaded', () => {
-    loadData();
-    setInterval(loadData, 60000); // 1분 간격으로 데이터 새로고침
-});
-
-// 나머지 코드는 변경 없음...
-
 
 // 데이터 표시
 function displayData(data) {
@@ -88,3 +80,11 @@ document.getElementById('search-input').addEventListener('input', (event) => {
     const filteredData = values.filter(row => row[3].toLowerCase().includes(query));
     displayData(filteredData);
 });
+
+// 페이지 로드 시 데이터 로드 및 주기적 업데이트 설정
+document.addEventListener('DOMContentLoaded', () => {
+    loadData();
+    setInterval(loadData, 60000); // 1분 간격으로 데이터 새로고침
+});
+
+// 나머지 코드는 변경 없음...
