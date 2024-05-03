@@ -68,7 +68,7 @@ function displayData(data) {
 
     // 헤더 생성
     const thead = document.createElement('thead');
-    const headerRow = ["날짜", "업체명", "차량번호"];
+    const headerRow = ["업체명", "운전자", "차량번호"];
     const tr = document.createElement('tr');
     headerRow.forEach(header => {
         const th = document.createElement('th');
