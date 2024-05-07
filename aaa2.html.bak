@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" style="background-color: #000;">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +9,13 @@
         body {
             margin: 0;
             font-family: 'Noto Sans KR', sans-serif;
-            background-color: #121212;
-            color: #fff;
+            background-color: #f8f9fa;
+            color: #212529;
         }
+
         .search-container {
             padding: 20px;
-            background: linear-gradient(45deg, #6a3093, #a044ff);
+            background: linear-gradient(45deg, #3498db, #8e44ad);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: center;
@@ -24,44 +25,69 @@
             z-index: 1000;
             transition: all 0.5s ease;
         }
+
         input[type="tel"] {
-            border: 2px solid #fff;
+            border: 2px solid #dee2e6;
             background-color: transparent;
             height: 50px;
-            color: #fff;
+            color: #212529;
             padding: 0 20px;
             width: 80%;
             transition: border 0.3s ease;
         }
+
         input[type="tel"]:focus {
-            border-color: #a044ff;
+            border-color: #3498db;
             outline: none;
         }
+
         #data-table {
-            transition: opacity 0.5s ease-in-out;
-            opacity: 1;
-            color: #ddd;
-            background-color: #333;
+            margin-top: 100px;
+            width: 100%;
+            transition: all 0.3s ease-in-out;
         }
-        #data-table th, #data-table td {
-            border: 1px solid #444;
-            padding: 12px;
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        #data-table thead th {
-            background-color: #222;
-            color: #fff;
-        }
-        #data-table tr:nth-child(4n+2), #data-table tr:nth-child(4n+3) {
-            background-color: #2c2c2c;
-        }
-        #data-table tr:nth-child(4n+4), #data-table tr:nth-child(4n+5) {
-            background-color: #333;
-        }
+
         .fade-in {
             animation: fadeIn 1s ease-in-out;
         }
+
+        #data-table {
+            color: #212529;
+            background-color: #e9ecef;
+            width: 100%;
+            margin-top: 100px;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #data-table th, #data-table td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+        }
+
+        #data-table thead th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        #data-table tbody tr:nth-child(odd) {
+            background-color: #f8f9fa;
+        }
+
+        #data-table tbody tr:nth-child(even) {
+            background-color: #e9ecef;
+        }
+
         .table-hover tbody tr:hover {
-            background-color: #484848;
+            background-color: #ced4da;
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
         }
     </style>
 </head>
@@ -70,7 +96,7 @@
         <input type="tel" id="search-input" class="form-control" placeholder="차량번호 검색...">
     </div>
 
-    <table id="data-table" class="table table-dark table-striped table-hover fade-in">
+    <table id="data-table" class="table table-striped table-hover fade-in">
         <!-- 자바스크립트를 통해 데이터가 여기에 채워집니다 -->
     </table>
 

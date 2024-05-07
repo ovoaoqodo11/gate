@@ -28,7 +28,7 @@
 
         input[type="tel"] {
             border: 2px solid #dee2e6;
-            background-color: transparent;
+
             height: 50px;
             color: #212529;
             padding: 0 20px;
@@ -64,10 +64,30 @@
             transition: opacity 0.5s ease-in-out;
         }
 
-        #data-table th, #data-table td {
-            border: 1px solid #dee2e6;
-            padding: 12px;
-        }
+#data-table th, #data-table td {
+    padding: 12px; /* Maintain consistent padding */
+}
+
+/* Set border styles for all cells */
+#data-table th, #data-table td {
+    border-left: 1px solid #dee2e6; /* Vertical borders for all cells */
+    border-right: 1px solid #dee2e6;
+}
+
+#data-table tr {
+    border-bottom: 1px solid #dee2e6; /* Bottom border for all rows */
+}
+
+/* Remove bottom border from every second row to group rows visually */
+#data-table tr:nth-child(4n), #data-table tr:nth-child(4n-1) {
+    border-bottom: none;
+}
+
+/* Add top border to start of new group for clarity */
+#data-table tr:nth-child(4n+1) {
+    border-top: 2px solid #dee2e6;
+}
+
 
         #data-table thead th {
             background-color: #007bff;
