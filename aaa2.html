@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko" style="background-color: #000;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles2.css?10">
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: visible;
+        }
+
+        input[type="search"], input[type="tel"] {
+            font-size: 16px;
+            width: auto;
+            margin: 0;
+            padding: 8px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #333;
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+        }
+
+        nav a:hover {
+            color: #cd3232;
+        }
+
+        .search-container {
+            position: fixed;
+            top: 1px;
+            left: 0;
+            width: 96%;
+            background-color: #333;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+        }
+
+        #data-table {
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            overflow: auto;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid search-container">
+        <input type="tel" class="form-control" id="search-input" placeholder="차량번호 검색..">
+    </div>
+
+    <table id="data-table" class="table table-dark table-striped">
+        <!-- Data will be populated here via JavaScript -->
+    </table>
+
+    <script src="qqq.js?537"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
