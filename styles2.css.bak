@@ -103,9 +103,9 @@ input, select {
 }
 
 #search-input {
-    width: calc(90% - 5px);
+    width: calc(80% - 5px);
     margin-right: 2%;
-    background-color: #555; /* 입력 요소 배경색 변경 */
+    background-color: #fff; /* 입력 요소 배경색 변경 */
     color: #fff; /* 입력 요소 텍스트 색상 변경 */
 }
 
