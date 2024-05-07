@@ -35,6 +35,7 @@ function displayData(data) {
     data.forEach(row => {
         const mainRow = document.createElement('tr');
         const detailRow = document.createElement('tr');
+        detailRow.style.display = 'none'; // 자재 행을 기본적으로 숨김
 
         [0, 1, 3].forEach(index => {
             const td = document.createElement('td');
@@ -47,12 +48,8 @@ function displayData(data) {
         detailTd.setAttribute('colspan', 3);
         detailRow.appendChild(detailTd);
 
-        if (!row[2].trim()) {
-            detailRow.style.display = 'none';
-        }
-
         mainRow.addEventListener('click', () => {
-            toggleDetails(mainRow, row);
+            toggleDetails(detailRow); // 메인 행을 터치하면 상세 행 토글
         });
 
         table.appendChild(mainRow);
@@ -61,6 +58,15 @@ function displayData(data) {
 
     if (data.length === 0) {
         table.innerHTML += '<tr><td colspan="3" style="text-align: center;">검색된 데이터가 없습니다.</td></tr>';
+    }
+}
+
+// 상세 정보 토글 기능
+function toggleDetails(detailRow) {
+    if (detailRow.style.display === 'none') {
+        detailRow.style.display = '';
+    } else {
+        detailRow.style.display = 'none';
     }
 }
 
