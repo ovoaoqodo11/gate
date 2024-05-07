@@ -43,8 +43,6 @@ input, select {
     color: #fff; /* 입력 요소 텍스트 색상 변경 */
 }
 
-/* 애니메이션 및 기타 스타일은 이전과 동일하게 유지 */
-
 
 /* 애니메이션을 위한 스타일 */
 @keyframes slideDown {
@@ -105,7 +103,7 @@ input, select {
 }
 
 #search-input {
-    width: calc(49% - 5px);
+    width: calc(90% - 5px);
     margin-right: 2%;
     background-color: #555; /* 입력 요소 배경색 변경 */
     color: #fff; /* 입력 요소 텍스트 색상 변경 */
