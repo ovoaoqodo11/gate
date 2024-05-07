@@ -107,7 +107,8 @@ input, select {
     margin-right: 2%;
     background-color: #fff; /* 입력 요소 배경색 변경 */
     color: #000;
-	font-weight:bold/* 입력 요소 텍스트 색상 변경 */
+	font-weight:bold
+	/* 입력 요소 텍스트 색상 변경 */
 }
 
 #dropdown-filter {
