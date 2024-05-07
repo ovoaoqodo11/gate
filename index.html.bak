@@ -42,10 +42,22 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #333;
-            padding: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            z-index: 10;
+            padding: 1rem 0;
+            background-color: #343a40; /* 다크 그레이 배경 */
+            z-index: 1000;
+        }
+
+        input[type="tel"] {
+            width: 90%; /* 입력 필드 너비 */
+            margin: auto;
+            padding: 0.5rem;
+            border: 1px solid #ced4da;
+            background-color: #495057; /* 어두운 입력 필드 배경 */
+            color: #ffffff; /* 흰색 텍스트 */
+        }
+
+        input[type="tel"]::placeholder {
+            color: #dee2e6; /* 플레이스홀더 색상 */
         }
 
         #data-table {

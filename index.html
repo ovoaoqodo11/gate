@@ -5,49 +5,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>검색</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles2.css?10">
     <style>
-        body {
-            background-color: #343a40; /* 다크 그레이 배경 */
-            color: #ffffff; /* 흰색 텍스트 */
-        }
-
-        .search-container {
-            position: fixed;
-            top: 0;
-            left: 0;
+        html, body {
             width: 100%;
-            padding: 1rem 0;
-            background-color: #343a40; /* 다크 그레이 배경 */
-            z-index: 1000;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: visible; /* overflow 속성을 visible로 변경 */
         }
 
-        input[type="tel"] {
-            width: 90%; /* 입력 필드 너비 */
-            margin: auto;
-            padding: 0.5rem;
-            border: 1px solid #ced4da;
-            background-color: #495057; /* 어두운 입력 필드 배경 */
-            color: #ffffff; /* 흰색 텍스트 */
+        input[type="search"], input[type="tel"] {
+            font-size: 16px;
+            width: auto; /* 최대 너비 제한을 제거하고 자동으로 조정 */
+            margin: 0; /* 필요에 따라 마진 조정 */
+            padding: 8px; /* 적당한 패딩 제공 */
+            display: block; /* 블록 레벨 요소로 변경하여 가운데 정렬 가능 */
+            margin-left: auto; /* 자동 마진으로 가운데 정렬 */
+            margin-right: auto;
         }
 
-        input[type="tel"]::placeholder {
-            color: #dee2e6; /* 플레이스홀더 색상 */
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #333;
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+        }
+
+        nav a:hover {
+            color: #cd3232;
+        }
+
+        /* 스타일 조정 */
+        .search-container {
+            position: fixed; /* 상단에 고정 */
+            top: 1px; /* 화면의 상단에 고정 */
+            left: 0;
+            width: 96%; /* 화면 전체 너비로 설정 */
+            background-color: #333; /* 배경색 변경 */
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 10; /* 다른 요소 위에 위치 */
+            display: flex;
+            justify-content: center; /* 가운데 정렬 */
+        }
+
+        #data-table {
+            width: 100%;
+            background-color: #333; /* 결과 테이블의 배경색 */
+            color: #000; /* 글자 색상 */
+            overflow: auto; /* 필요한 경우 스크롤바 표시 */
+            margin-top: 60px; /* 검색창 높이만큼 공간 생성 */
         }
     </style>
 </head>
 
 <body>
-    <div class="search-container d-flex justify-content-center">
-        <input type="tel" class="form-control" id="search-input" placeholder="차량번호 검색..">
+    <div class="search-container">
+        <input type="tel" id="search-input" placeholder="차량번호 검색..">
     </div>
 
-    <table id="data-table" class="table table-dark table-striped mt-5">
+    <table id="data-table">
         <!-- Data will be populated here via JavaScript -->
     </table>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="qqq.js?537"></script>
 </body>
 
 </html>
