@@ -44,8 +44,19 @@ function displayData(data) {
         });
 
         const detailTd = document.createElement('td');
-        detailTd.textContent = "자재: " + row[2];
         detailTd.setAttribute('colspan', 3);
+
+        const materialDiv = document.createElement('div');
+        materialDiv.textContent = "자재: " + row[2];
+
+        const phoneDiv = document.createElement('div');
+        const phoneLink = document.createElement('a');
+        phoneLink.href = `tel:${row[6]}`;
+        phoneLink.textContent = "연락처: " + row[6];
+        phoneDiv.appendChild(phoneLink);
+
+        detailTd.appendChild(materialDiv);
+        detailTd.appendChild(phoneDiv);
         detailRow.appendChild(detailTd);
 
         mainRow.addEventListener('click', () => {
