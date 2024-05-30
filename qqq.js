@@ -53,6 +53,7 @@ function displayData(data) {
         const phoneLink = document.createElement('a');
         phoneLink.href = `tel:${row[6]}`;
         phoneLink.textContent = "연락처: " + row[6];
+		phoneLink.style.color = 'white';
         phoneDiv.appendChild(phoneLink);
 
         detailTd.appendChild(materialDiv);
